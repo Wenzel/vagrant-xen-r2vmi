@@ -1,0 +1,61 @@
+---
+- name: install build tools
+  package:
+    name: "{{ item }}"
+  with_items:
+    - git
+    - build-essential
+    - gcc
+    - libtool
+    - automake
+    - pkg-config
+    - check
+    - libglib2.0-dev
+    - libvirt-dev
+    - bison
+    - flex
+    - python-dev
+    - libjson-c-dev
+    - libxc-dev
+    - libxenstore3.0
+    - libxen-dev
+    - python3-cffi
+    - python3-pkgconfig
+
+- name: clone libvmi
+  git:
+    repo: 'https://github.com/KVM-VMI/libvmi'
+    dest: /tmp/libvmi
+    version: pyvmi_cffi
+  become: false
+
+- name: generate configure
+  command: ./autogen.sh
+  args:
+    chdir: "/tmp/libvmi"
+  become: false
+
+- name: configure libvmi
+  command: ./configure --prefix=/usr --enable-xen --disable-kvm
+  args:
+    chdir: "/tmp/libvmi"
+  become: false
+
+- name: build libvmi
+  command: make
+  args:
+    chdir: "/tmp/libvmi"
+  become: false
+
+- name: install libvmi
+  command: make install
+  args:
+    chdir: "/tmp/libvmi"
+
+- name: install python bindings
+  command: "{{ item }}"
+  args:
+    chdir: "/tmp/libvmi/tools/pyvmi"
+  with_items:
+    - './setup.py build'
+    - './setup.py install'

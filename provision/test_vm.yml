@@ -1,0 +1,19 @@
+---
+- name: add user to libvirt group
+  user:
+    name: vagrant
+    groups: libvirt
+    append: yes
+
+- name: download image
+  get_url:
+    url: 'https://people.debian.org/~aurel32/qemu/amd64/debian_wheezy_amd64_standard.qcow2'
+    dest: /var/lib/libvirt/images/debian.qcow2
+
+- name: copy domain XML
+  copy:
+    src: domain.xml
+    dest: /root/domain.xml
+
+- name: define domain
+  command: virsh define /root/domain.xml
