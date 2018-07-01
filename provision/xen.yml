@@ -5,11 +5,3 @@
   with_items:
     - xen-hypervisor-amd64
     - virt-manager
-
-- name: disable balloning for Xen
-  lineinfile:
-    dest: /etc/default/grub
-    line: 'GRUB_CMDLINE_XEN="dom0_mem=1024M,max:1024M"'
-
-- name: update GRUB configuration
-  command: update-grub
