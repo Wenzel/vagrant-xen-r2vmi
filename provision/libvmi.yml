@@ -36,7 +36,7 @@
   become: false
 
 - name: configure libvmi
-  command: ./configure --prefix=/usr --enable-xen --disable-kvm
+  command: ./configure --prefix=/usr --disable-kvm --enable-static=no
   args:
     chdir: "/tmp/libvmi"
   become: false
