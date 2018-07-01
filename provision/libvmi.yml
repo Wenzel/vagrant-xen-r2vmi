@@ -23,31 +23,31 @@
 - name: clone libvmi
   git:
     repo: 'https://github.com/libvmi/libvmi'
-    dest: /tmp/libvmi
+    dest: /home/vagrant/libvmi
   become: false
 
 - name: generate configure
   command: ./autogen.sh
   args:
-    chdir: "/tmp/libvmi"
+    chdir: "/home/vagrant/libvmi"
   become: false
 
 - name: configure libvmi
   command: ./configure --prefix=/usr --disable-kvm --enable-static=no
   args:
-    chdir: "/tmp/libvmi"
+    chdir: "/home/vagrant/libvmi"
   become: false
 
 - name: build libvmi
   command: make
   args:
-    chdir: "/tmp/libvmi"
+    chdir: "/home/vagrant/libvmi"
   become: false
 
 - name: install libvmi
   command: make install
   args:
-    chdir: "/tmp/libvmi"
+    chdir: "/home/vagrant/libvmi"
 
 - name: install libvmi python bindings build dependencies
   package:
@@ -63,16 +63,16 @@
 - name: clone libvmi python bindings
   git:
     repo: 'https://github.com/libvmi/python'
-    dest: /tmp/python
+    dest: /home/vagrant/libvmi-python
   become: false
 
 - name: build libvmi python bindings
   command: python3 setup.py build
   args:
-    chdir: "/tmp/python"
+    chdir: "/home/vagrant/libvmi-python"
   become: false
 
 - name: install libvmi python bindings
   command: python3 setup.py install
   args:
-    chdir: "/tmp/python"
+    chdir: "/home/vagrant/libvmi-python"
