@@ -1,19 +1,36 @@
 ---
+- include: packer.yml
+
+- name: install libvirt
+  package:
+    name: libvirt-daemon-system
+
 - name: add user to libvirt group
   user:
     name: vagrant
     groups: libvirt
     append: yes
 
-- name: download image
-  get_url:
-    url: 'https://people.debian.org/~aurel32/qemu/amd64/debian_wheezy_amd64_standard.qcow2'
-    dest: /var/lib/libvirt/images/debian.qcow2
+- name: set default network as autostart
+  command: virsh -c qemu:///system net-autostart default
 
-- name: copy domain XML
+- name: ensure default libvirt network is started
+  command: virsh -c qemu:///system net-start default
+
+- name: copy packer template
   copy:
-    src: domain.xml
-    dest: /root/domain.xml
+    src: packer-templates
+    dest: /data/
+    owner: vagrant
+    group: vagrant
+  become: false
 
-- name: define domain
-  command: virsh define /root/domain.xml
+- name: build Windows 7 image
+  command: packer build windows_7_x64.json
+  args:
+    chdir: "/data/packer-templates"
+
+- name: import Windows 7 image in libvirt
+  command: ./import_libvirt.py --open-vnc output_qemu/win7x64
+  args:
+    chdir: "/data/packer-templates"
