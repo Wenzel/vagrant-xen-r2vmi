@@ -10,6 +10,7 @@
         - htop
         - vim
 
+    - include: partition.yml
     - include: remote.yml
     - include: libvmi.yml
     - include: rekall.yml
