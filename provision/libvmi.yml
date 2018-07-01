@@ -24,9 +24,8 @@
 
 - name: clone libvmi
   git:
-    repo: 'https://github.com/KVM-VMI/libvmi'
+    repo: 'https://github.com/libvmi/libvmi'
     dest: /tmp/libvmi
-    version: pyvmi_cffi
   become: false
 
 - name: generate configure
@@ -51,11 +50,3 @@
   command: make install
   args:
     chdir: "/tmp/libvmi"
-
-- name: install python bindings
-  command: "{{ item }}"
-  args:
-    chdir: "/tmp/libvmi/tools/pyvmi"
-  with_items:
-    - './setup.py build'
-    - './setup.py install'
