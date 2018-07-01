@@ -8,7 +8,7 @@ Vagrant.configure(2) do |config|
 
     config.vm.provider :libvirt do |libvirt|
         libvirt.cpus = 2
-        libvirt.memory = 3000
+        libvirt.memory = 4096
         libvirt.nic_model_type = "virtio"
         libvirt.driver = "kvm"
         libvirt.nested = true
@@ -18,7 +18,6 @@ Vagrant.configure(2) do |config|
         ansible.compatibility_mode = "2.0"
         # ansible.verbose =  '-vvv'
         # ansible.start_at_task =  ''
-        root_dir = '/vagrant'
         ansible.playbook = "provision/playbook_1.yml"
     end
 
@@ -27,9 +26,7 @@ Vagrant.configure(2) do |config|
     config.vm.provision "ansible" do |ansible|
         ansible.compatibility_mode = "2.0"
         # ansible.verbose =  '-vvv'
-        # ansible.verbose =  '-vvv'
         # ansible.start_at_task =  ''
-        root_dir = '/vagrant'
         ansible.playbook = "provision/playbook_2.yml"
     end
 end
