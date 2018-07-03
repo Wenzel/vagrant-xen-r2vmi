@@ -1,7 +1,10 @@
 ---
 - name: Install Xen
-  apt:
+  package:
     name: "{{ item }}"
   with_items:
-    - xen-hypervisor-amd64
+    - xen
     - virt-manager
+
+- name: update GRUB to boot on Xen kernel by default
+  command: grub2-set-default 'Fedora, with Xen hypervisor'
