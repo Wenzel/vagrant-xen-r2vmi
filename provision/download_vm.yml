@@ -13,6 +13,6 @@
     - pv
 
 - name: download Windows image with megadown
-  command: ./megadown 'https://mega.nz/#!XVR3FAoC!Nlg7m1EvHGHYSlZOf7_CQg0pEM3TEtxmnWf47Q87r20' -o /data/images/win7x64.qcow2
+  command: ./megadown 'https://mega.nz/#!XVR3FAoC!Nlg7m1EvHGHYSlZOf7_CQg0pEM3TEtxmnWf47Q87r20' -o /var/lib/libvirt/images/win7x64.qcow2
   args:
     chdir: /tmp/megadown
