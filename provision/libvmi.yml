@@ -60,7 +60,7 @@
     - python3-pkgconfig
     - python3-future
     - python3-pytest
-    - python3-libvirt
+    - libvirt-python3
 
 - name: clone libvmi python bindings
   git:
