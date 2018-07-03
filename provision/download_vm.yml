@@ -1,0 +1,18 @@
+---
+- name: clone megadown
+  git:
+    repo: 'https://github.com/tonikelope/megadown'
+    dest: /tmp/megadown
+  become: false
+
+- name: install megadown dependencies
+  package:
+    name: "{{ item }}"
+  with_items:
+    - wget
+    - pv
+
+- name: download Windows image with megadown
+  command: ./megadown 'https://mega.nz/#!XVR3FAoC!Nlg7m1EvHGHYSlZOf7_CQg0pEM3TEtxmnWf47Q87r20' -o /var/lib/libvirt/images/win7x64.qcow2
+  args:
+    chdir: /tmp/megadown

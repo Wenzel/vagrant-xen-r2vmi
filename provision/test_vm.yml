@@ -1,36 +1,16 @@
 ---
-- include: packer.yml
+- include: download_vm.yml
 
-- name: install libvirt
+- name: refresh libvirt pool
+  command: virsh -c qemu:///system pool-refresh default
+
+- name: install libvirt-python module to manage VMs
   package:
-    name: libvirt-daemon-system
+    name: python-libvirt
 
-- name: add user to libvirt group
-  user:
-    name: vagrant
-    groups: libvirt
-    append: yes
-
-- name: set default network as autostart
-  command: virsh -c qemu:///system net-autostart default
-
-- name: ensure default libvirt network is started
-  command: virsh -c qemu:///system net-start default
-
-- name: copy packer template
-  copy:
-    src: packer-templates
-    dest: /data/
-    owner: vagrant
-    group: vagrant
-  become: false
-
-- name: build Windows 7 image
-  command: packer build windows_7_x64.json
-  args:
-    chdir: "/data/packer-templates"
-
-- name: import Windows 7 image in libvirt
-  command: ./import_libvirt.py --open-vnc output_qemu/win7x64
-  args:
-    chdir: "/data/packer-templates"
+- name: define VM in libvirt
+  virt:
+    name: windows7
+    command: define
+    xml: "{{ lookup('file', 'domain.xml') }}"
+    uri: 'xen:///'

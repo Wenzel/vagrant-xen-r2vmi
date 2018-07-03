@@ -10,8 +10,7 @@
         - htop
         - vim
 
-    - include: partition.yml
     - include: remote.yml
+    - include: libvirt.yml
     - include: libvmi.yml
-    - include: rekall.yml
     - include: test_vm.yml

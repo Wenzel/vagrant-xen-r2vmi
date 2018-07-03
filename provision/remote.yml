@@ -13,7 +13,7 @@
 
 - name: restart SSH server
   systemd:
-    name: ssh
+    name: sshd
     state: restarted
 
 # python -c 'import crypt; print crypt.crypt("vagrant", "vagrant-salt$$")'
