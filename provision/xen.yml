@@ -4,7 +4,6 @@
     name: "{{ item }}"
   with_items:
     - xen
-    - virt-manager
 
 - name: update GRUB to boot on Xen kernel by default
   command: grub2-set-default 'Fedora, with Xen hypervisor'
