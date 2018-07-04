@@ -36,3 +36,14 @@ Your `Vagrant` box is ready !
 # Usage
 
 Run `vagrant ssh` to get a shell into the VM.
+
+# Virt-Manager: remote connection
+
+As SSH is open for password authentication, you can manage your VMs from
+`virt-manager` with a remote connection.
+
+Use `vagrant ssh` and `ip a` to get the IP address of the VM, and add a new
+connection in `virt-manager` with these credentials:
+
+- username: `root`
+- password: `vagrant`
