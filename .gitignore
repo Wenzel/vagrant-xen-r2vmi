@@ -1,3 +1,3 @@
 .vagrant
-provision/*.retry
+*.retry
 venv/
