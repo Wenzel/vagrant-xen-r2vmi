@@ -2,7 +2,7 @@
     <name>windows7</name>
     <os>
         <type arch='x86_64' machine='xenfv'>hvm</type>
-        <loader type='rom'>/usr/lib/xen-4.8/boot/hvmloader</loader>
+        <loader type='rom'>/usr/lib/xen/boot/hvmloader</loader>
         <boot dev='hd'/>
     </os>
     <memory unit='MiB'>2048</memory>
@@ -20,12 +20,15 @@
         <emulator>/usr/bin/qemu-system-x86_64</emulator>
         <disk type='file'>
             <driver name='qemu' type='qcow2'/>
-            <source file='/data/images/win7x64.qcow2'/>
+            <source file='/var/lib/libvirt/images/win7x64.qcow2'/>
             <target dev='hda'/>
         </disk>
         <controller type='pci' index='0' model='pci-root'/>
         <graphics type='vnc' port='-1' autoport='yes'>
             <listen type='address' address='0.0.0.0'/>
         </graphics>
+        <video>
+          <model type='vga' vram='16384' heads='1' primary='yes'/>
+        </video>
     </devices>
 </domain>
