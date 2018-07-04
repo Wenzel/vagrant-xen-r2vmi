@@ -3,6 +3,8 @@ Vagrant.configure(2) do |config|
 
     # build Xen from source
     source = false
+    # install VMI tools
+    vmi = false
 
     config.vm.synced_folder ".", "/vagrant", disabled: true
 
@@ -31,5 +33,8 @@ Vagrant.configure(2) do |config|
         # ansible.verbose =  '-vvv'
         # ansible.start_at_task =  ''
         ansible.playbook = "provision/playbook_2.yml"
+        ansible.extra_vars = {
+            'vmi': vmi,
+        }
     end
 end

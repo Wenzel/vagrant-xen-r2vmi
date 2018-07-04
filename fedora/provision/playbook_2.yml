@@ -15,8 +15,13 @@
         - git
         - htop
         - vim
+        - wget
 
     - include: remote.yml
     - include: libvirt.yml
+    - include: rekall.yml
+      when: vmi
     - include: libvmi.yml
+      when: vmi
+    - include: packer.yml
     - include: test_vm.yml
