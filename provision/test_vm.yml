@@ -1,8 +1,14 @@
 ---
+- name: Install QEMU
+  package:
+    name: "{{ item }}"
+  with_items:
+    - qemu
+
 - include: download_vm.yml
 
 - name: refresh libvirt pool
-  command: virsh -c qemu:///system pool-refresh default
+  command: virsh -c xen:/// pool-refresh default
 
 - name: install libvirt-python module to manage VMs
   package:
