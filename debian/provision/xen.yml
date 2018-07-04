@@ -1,0 +1,9 @@
+---
+- name: Install Xen
+  package:
+    name: "{{ item }}"
+  with_items:
+    - xen-system-amd64
+
+- name: update GRUB to boot on Xen kernel by default
+  command: grub-set-default 'Debian GNU/Linux, with Xen hypervisor'

@@ -1,0 +1,22 @@
+---
+- name: Install QEMU
+  package:
+    name: "{{ item }}"
+  with_items:
+    - qemu
+
+- include: download_vm.yml
+
+- name: refresh libvirt pool
+  command: virsh -c xen:/// pool-refresh default
+
+- name: install libvirt-python module to manage VMs
+  package:
+    name: python-libvirt
+
+- name: define VM in libvirt
+  virt:
+    name: windows7
+    command: define
+    xml: "{{ lookup('file', 'domain.xml') }}"
+    uri: 'xen:///'
