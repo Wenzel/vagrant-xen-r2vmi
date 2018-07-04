@@ -13,3 +13,7 @@
         state: latest
   tasks:
     - include: xen.yml
+      when: not source
+
+    - include: xen_source.yml
+      when: source
