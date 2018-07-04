@@ -42,11 +42,8 @@
 - name: rebuild dynamic linker cache
   command: /sbin/ldconfig
 
-# we have to boot on a specific older kernel
-# otherwise Xen will crash
-# see https://bugzilla.redhat.com/show_bug.cgi?id=1486002
 - name: update GRUB to boot on Xen kernel by default
-  command: grub2-set-default 'Advanced options for Fedora (with Xen hypervisor)>Xen hypervisor, version 4.11>Fedora, with Xen 4.11 and Linux 4.16.3-301.fc28.x86_64'
+  command: grub-set-default 'Debian GNU/Linux, with Xen hypervisor'
 
 - name: update GRUB2
   command: update-grub2
