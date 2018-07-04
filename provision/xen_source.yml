@@ -20,6 +20,8 @@
 
 - name: install xen build dependencies with builddep
   command: dnf builddep -y xen kernel
+  args:
+    warn: false
 
 - name: install Xen build dependencies
   package:
