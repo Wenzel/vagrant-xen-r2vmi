@@ -1,6 +1,12 @@
 ---
 - hosts: default
   become: true
+  pre_tasks:
+    - name: test Xen hypervisor
+      slurp:
+        src: /sys/hypervisor/type
+      register: hypertype
+      failed_when: hypertype['content'] | b64decode | trim != "xen"
   tasks:
     - name: install useful tools
       package:
