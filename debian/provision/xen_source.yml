@@ -23,12 +23,12 @@
     version: stable-4.11
   become: false
 
-- name: install xen build dependencies with buid-dep
+- name: install Xen build dependencies with buid-dep
   apt:
     name: xen
     state: build-dep
 
-- name: install xen build dependencies
+- name: install Xen build dependencies
   package:
     name: "{{ item }}"
   with_items:
@@ -60,17 +60,20 @@
 - name: rebuild dynamic linker cache
   command: /sbin/ldconfig
 
-- name: update GRUB to boot on Xen kernel by default
-  command: grub-set-default 'Debian GNU/Linux, with Xen hypervisor'
+- name: boot on Xen kernel by default
+  lineinfile:
+    path: /etc/default/grub.d/xen.cfg
+    line: 'GRUB_DEFAULT="Debian GNU/Linux, with Xen hypervisor"'
+    create: yes
 
-- name: update GRUB2
-  command: update-grub2
+- name: update GRUB
+  command: update-grub
 
-- name: enable Xen system services
-  service:
-    name: "{{ item }}"
-    enabled: yes
-  with_items:
-    - xenconsoled.service
-    - xendomains.service
-    - xenstored.service
+  # - name: enable Xen system services
+  #   service:
+  #     name: "{{ item }}"
+  #     enabled: yes
+  #   with_items:
+  #     - xenconsoled.service
+  #     - xendomains.service
+  #     - xenstored.service
