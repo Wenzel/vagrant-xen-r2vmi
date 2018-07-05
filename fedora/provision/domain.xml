@@ -1,11 +1,11 @@
 <domain type='xen'>
-    <name>windows7</name>
+    <name>winxp</name>
     <os>
         <type arch='x86_64' machine='xenfv'>hvm</type>
         <loader type='rom'>/usr/lib/xen/boot/hvmloader</loader>
         <boot dev='hd'/>
     </os>
-    <memory unit='MiB'>2048</memory>
+    <memory unit='MiB'>1024</memory>
     <vcpu>1</vcpu>
     <on_poweroff>destroy</on_poweroff>
     <on_reboot>restart</on_reboot>
@@ -17,10 +17,10 @@
     </features>
     <clock sync="localtime"/>
     <devices>
-        <emulator>/usr/bin/qemu-system-x86_64</emulator>
+        <emulator>/usr/bin/qemu-system-i386</emulator>
         <disk type='file'>
             <driver name='qemu' type='qcow2'/>
-            <source file='/var/lib/libvirt/images/win7x64.qcow2'/>
+            <source file='/var/lib/libvirt/images/winxp.qcow2'/>
             <target dev='hda'/>
         </disk>
         <controller type='pci' index='0' model='pci-root'/>

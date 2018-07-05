@@ -23,5 +23,4 @@
       when: vmi
     - include: libvmi.yml
       when: vmi
-    - include: packer.yml
     - include: test_vm.yml

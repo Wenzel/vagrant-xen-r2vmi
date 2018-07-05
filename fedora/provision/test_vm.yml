@@ -5,7 +5,11 @@
   with_items:
     - qemu
 
-- include: download_vm.yml
+- name: download Windows image
+  get_url:
+    url: 'https://www.dropbox.com/s/00f6t4xovjpuwv3/winxp.qcow2?dl=1'
+    dest: /var/lib/libvirt/images/winxp.qcow2
+    checksum: 'sha1:d460df4ef17cf10f10771b43c2ae2c297429e4bf'
 
 - name: refresh libvirt pool
   command: virsh -c xen:/// pool-refresh default
@@ -16,7 +20,7 @@
 
 - name: define VM in libvirt
   virt:
-    name: windows7
+    name: winxp
     command: define
     xml: "{{ lookup('file', 'domain.xml') }}"
     uri: 'xen:///'
