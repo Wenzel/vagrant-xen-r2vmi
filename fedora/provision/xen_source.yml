@@ -53,11 +53,15 @@
 - name: update GRUB2
   command: grub2-mkconfig -o /boot/grub2/grub.cfg
 
+- name: update GRUB to boot on Xen kernel by default
+  command: grub2-set-default 'Advanced options for Fedora (with Xen hypervisor)>Xen hypervisor, version 4.11>Fedora, with Xen 4.11 and Linux 4.16.3-301.fc28.x86_64'
+
 - name: enable Xen system services
   service:
     name: "{{ item }}"
     enabled: yes
   with_items:
-    - xenconsoled.service
+    - xen-init-dom0.service
     - xendomains.service
+    - xenconsoled.service
     - xenstored.service
