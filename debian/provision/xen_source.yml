@@ -10,6 +10,12 @@
     - python3
     - python3-dev
 
+- name: add APT source URIs
+  apt_repository:
+    repo: 'deb-src http://httpredir.debian.org/debian stretch main'
+    state: present
+    update_cache: yes
+
 - name: clone Xen source code
   git:
     repo: 'git://xenbits.xen.org/xen.git'
@@ -21,6 +27,18 @@
   apt:
     name: xen
     state: build-dep
+
+- name: install xen build dependencies
+  package:
+    name: "{{ item }}"
+  with_items:
+    - libnl-3-dev
+    - libnl-route-3-dev
+    - libsystemd-dev
+    - libsdl-dev
+    - flex
+    - bison
+    - texinfo
 
 - name: configure Xen
   command: ./configure --prefix=/usr --libdir=/usr/lib64 --enable-systemd
