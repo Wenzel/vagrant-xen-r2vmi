@@ -12,6 +12,15 @@
         name: '*'
         state: latest
   tasks:
+    - name: install useful tools
+      package:
+        name: "{{ item }}"
+      with_items:
+        - git
+        - htop
+        - vim
+        - wget
+
     - include: xen.yml
       when: not source
 
