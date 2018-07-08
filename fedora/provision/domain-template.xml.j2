@@ -1,11 +1,11 @@
 <domain type='xen'>
-    <name>winxp</name>
+<name>{{ item.vm_name }}</name>
     <os>
         <type arch='x86_64' machine='xenfv'>hvm</type>
         <loader type='rom'>/usr/lib/xen/boot/hvmloader</loader>
         <boot dev='hd'/>
     </os>
-    <memory unit='MiB'>1024</memory>
+    <memory unit='MiB'>{{ item.vm_ram | default('1024') }}</memory>
     <vcpu>1</vcpu>
     <on_poweroff>destroy</on_poweroff>
     <on_reboot>restart</on_reboot>
@@ -17,12 +17,15 @@
     </features>
     <clock sync="localtime"/>
     <devices>
-        <emulator>/usr/bin/qemu-system-i386</emulator>
+        <emulator>/usr/bin/qemu-system-x86_64</emulator>
         <disk type='file'>
             <driver name='qemu' type='qcow2'/>
-            <source file='/var/lib/libvirt/images/winxp.qcow2'/>
+            <source file='/var/lib/libvirt/images/{{ item.vm_name }}.qcow2'/>
             <target dev='hda'/>
         </disk>
+        <interface type='network'>
+            <source network='default' bridge='virbr0'/>
+        </interface>
         <controller type='pci' index='0' model='pci-root'/>
         <graphics type='vnc' port='-1' autoport='yes'>
             <listen type='address' address='0.0.0.0'/>
