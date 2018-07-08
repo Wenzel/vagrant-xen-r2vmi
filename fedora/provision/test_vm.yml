@@ -11,7 +11,7 @@
 
 - include: define_vm.yml
   with_items:
-    - { vm_name: 'winxp', vm_url: 'https://www.dropbox.com/s/00f6t4xovjpuwv3/winxp.qcow2?dl=1', vm_url_sha1: 'd460df4ef17cf10f10771b43c2ae2c297429e4bf' }
+    - { vm_name: 'winxp', vm_url: 'https://www.dropbox.com/s/0zycew5u3xnf8m7/winxp.qcow2?dl=1', vm_url_sha1: '39870605162334b74110b9d810ede2c3460fb625' }
     - { vm_name: 'win7', vm_url: 'https://www.dropbox.com/s/2affsti933237v3/win7x64.qcow2?dl=1', vm_url_sha1: '0c8d422053ef34109a53d067d71fd2c43435cb2f', vm_ram: '1500' }
 
 - name: refresh libvirt pool
