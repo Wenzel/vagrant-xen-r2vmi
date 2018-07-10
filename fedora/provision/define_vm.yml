@@ -21,5 +21,6 @@
   blockinfile:
     path: '/etc/libvmi.conf'
     block: "{{ lookup('file', 'files/'+item.vm_name+'.conf')}}"
+    marker: ""
     state: present
     create: yes
