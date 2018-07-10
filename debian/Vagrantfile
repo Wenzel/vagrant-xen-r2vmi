@@ -3,6 +3,8 @@ Vagrant.configure(2) do |config|
 
     # build Xen from source
     source = false
+    # version of Xen repo to checkout (tag, branch, etc...)
+    version = "stable-4.11"
     # install VMI tools
     vmi = false
 
@@ -26,6 +28,7 @@ Vagrant.configure(2) do |config|
         ansible.playbook = "provision/playbook_1.yml"
         ansible.extra_vars = {
             'source': source,
+            'version': version,
         }
     end
 

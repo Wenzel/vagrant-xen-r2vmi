@@ -8,7 +8,7 @@
   git:
     repo: 'git://xenbits.xen.org/xen.git'
     dest: /home/vagrant/xen
-    version: stable-4.11
+    version: "{{ version }}"
   become: false
 
 - name: install xen build dependencies with builddep

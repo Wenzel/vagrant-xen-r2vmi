@@ -20,7 +20,7 @@
   git:
     repo: 'git://xenbits.xen.org/xen.git'
     dest: /home/vagrant/xen
-    version: stable-4.11
+    version: "{{ version }}"
   become: false
 
 - name: install Xen build dependencies with buid-dep
@@ -69,11 +69,12 @@
 - name: update GRUB
   command: update-grub
 
-  # - name: enable Xen system services
-  #   service:
-  #     name: "{{ item }}"
-  #     enabled: yes
-  #   with_items:
-  #     - xenconsoled.service
-  #     - xendomains.service
-  #     - xenstored.service
+- name: enable Xen system services
+  service:
+    name: "{{ item }}"
+    enabled: yes
+  with_items:
+    - xen-init-dom0.service
+    - xendomains.service
+    - xenconsoled.service
+    - xenstored.service
