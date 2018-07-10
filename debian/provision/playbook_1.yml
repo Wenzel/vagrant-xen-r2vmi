@@ -2,6 +2,8 @@
 - hosts: default
   become: true
   pre_tasks:
+    - name: check for virtualization extensions in cpuinfo
+      shell: egrep '(vmx|svm)' /proc/cpuinfo
     - name: update APT cache
       apt:
         update_cache: yes
