@@ -17,7 +17,17 @@
     xml: "{{ lookup('template', 'domain-template.xml.j2') }}"
     uri: 'xen:///'
 
-- name: install libvmi config
+- name: ensure libvmi config dir is present
+  file:
+    path: /etc/libvmi
+    state: directory
+
+- name: install libvmi profile
+  copy:
+    src: "files/{{ item.vm_name }}-profile.json"
+    dest: "/etc/libvmi/{{ item.vm_name}}-profile.json"
+
+- name: install libvmi config entry
   blockinfile:
     path: '/etc/libvmi.conf'
     block: "{{ lookup('file', 'files/'+item.vm_name+'.conf')}}"
