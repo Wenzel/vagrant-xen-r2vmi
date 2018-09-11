@@ -1,10 +1,9 @@
-# vagrant-xen
+# vagrant-xen-r2vmi
 
-This repository provides a set of Vagrant boxes to configure and install Xen.
+This repository provides a set of Vagrant boxes to configure and install Xen, in order to run the
+[r2vmi](https://github.com/Wenzel/r2vmi) `radare2` plugin.
 
-The initial goal was to build a test suite for virtual machine introspection
-tools on Xen in a reproducible environment, but it can be extended to many use
-cases revolving around Xen development.
+_Note_: Only `fedora` is supported at the moment.
 
 # Requirements
 
