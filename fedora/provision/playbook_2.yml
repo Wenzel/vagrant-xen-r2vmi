@@ -16,3 +16,5 @@
     - include: libvmi.yml
       when: vmi
     - include: test_vm.yml
+    - include: radare2.yml
+    - include: r2vmi.yml
